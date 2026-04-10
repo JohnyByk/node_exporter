@@ -2,16 +2,17 @@
 extends: default
 
 rules:
-  # 80 chars should be enough, but don't fail if a line is longer
   line-length:
-    max: 80
+    max: 160
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
     level: warning
   brackets:
-    min-spaces-inside: 0
+    min-spaces-inside: 1
     max-spaces-inside: 1
     level: warning
   braces:
-    min-spaces-inside: 0
+    min-spaces-inside: 1
     max-spaces-inside: 1
     level: warning
 ...

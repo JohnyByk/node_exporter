@@ -21,5 +21,5 @@ galaxy_info:
     - prometheus
     - monitoring
 
-dependencies: []
+dependencies: [ ]
 ...
