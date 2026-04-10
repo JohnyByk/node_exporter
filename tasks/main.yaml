@@ -12,4 +12,21 @@
     - prometheus
     - node_exporter
     - ufw
+
+- name: Web Auth | Deploy web.yml
+  ansible.builtin.copy:
+    dest: "{{ prometheus_node_exporter_config_path }}/web.yml"
+    content: |
+      {% if node_exporter_web_auth.enable | d(false) | bool %}
+      basic_auth_users:
+        {{ node_exporter_web_auth.user }}: {{ node_exporter_web_auth.password_hash }}
+      {% endif %}
+    owner: "{{ prometheus_node_exporter_user }}"
+    group: "{{ prometheus_node_exporter_group }}"
+    mode: '0640'
+  notify: Restart node_exporter
+  tags:
+    - prometheus
+    - node_exporter
+    - config
 ...
