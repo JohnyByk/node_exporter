@@ -2,5 +2,8 @@
 #
 START=yes
 
-#
-STARTUP_ARGS='{{ prometheus_node_exporter_startup_args }}'
+STARTUP_ARGS=" \
+  {% for arg in prometheus_node_exporter_startup_args %}
+  {{ arg }} \
+  {% endfor %}
+  "

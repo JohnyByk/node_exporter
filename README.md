@@ -33,11 +33,28 @@ prometheus_node_exporter_loglevel:     '{{ prometheus_loglevel }}'
 prometheus_node_exporter_listen:       '{{ prometheus_node_exporter_listen_ip }}:{{ prometheus_node_exporter_listen_port }}'
 prometheus_node_exporter_listen_port:  '9100'
 prometheus_node_exporter_listen_ip:    ''
-prometheus_node_exporter_version:      '0.17.0'
+prometheus_node_exporter_version:      '1.11.0'
+prometheus_node_exporter_validate_certs: true
+prometheus_node_exporter_startup_args:
+  - '--web.listen-address {{ prometheus_node_exporter_listen }}'
+  - '--collector.ntp.server=127.0.0.1'
+  - '--collector.ntp'
+  - '--collector.systemd'
+  - '--log.level={{ prometheus_node_exporter_loglevel }}'
+  - '--collector.filesystem.fs-types-exclude=\"^(sys|proc|auto|tmp|ns|squash)fs|overlay$\"'
+  - '--collector.filesystem.mount-points-exclude=\"^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/pods/.+)($|/)\"'
+  - '--web.config.file={{ prometheus_node_exporter_config_path }}/web.yml'
 
 enable_ufw:                            false
 prometheus_node_exporter_src_access:
   - "{{ ansible_default_ipv4.network }}/{{ ansible_default_ipv4.netmask }}"
+
+node_exporter_web_auth:
+  enable: false
+  user: 'admin'
+  password: 'password123'
+  salt: '1234567890123456789012'
+
 ```
 
 For typical deployment you can eventually define enable ufw fw and define src access list

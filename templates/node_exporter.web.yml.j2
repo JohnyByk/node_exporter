@@ -1,0 +1,6 @@
+---
+{% if node_exporter_web_auth.enable | bool %}
+basic_auth_users:
+  {{ node_exporter_web_auth.user }}: {{ node_exporter_web_auth.password | password_hash(hashtype='bcrypt', salt=node_exporter_web_auth.salt) }}
+{% endif %}
+...
