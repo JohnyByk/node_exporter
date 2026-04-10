@@ -19,7 +19,7 @@
     content: |
       {% if prometheus_node_exporter_web_auth.enable | d(false) | bool %}
       basic_auth_users:
-        {{ prometheus_node_exporter_web_auth.user }}: "{{ prometheus_node_exporter_web_auth.password }}"
+        {{ prometheus_node_exporter_web_auth.user }}: {{ prometheus_node_exporter_web_auth.password | password_hash('bcrypt', '1234567890123456789012') }}
       {% endif %}
     owner: "{{ prometheus_node_exporter_user }}"
     group: "{{ prometheus_node_exporter_group }}"

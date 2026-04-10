@@ -31,6 +31,6 @@ prometheus_node_exporter_src_access:
   - "{{ ansible_default_ipv4.network }}/{{ ansible_default_ipv4.netmask }}"
 
 prometheus_node_exporter_web_auth:
-  enable: "{{ prometheus_node_exporter.enable | d(false) }}"
-  user: "{{ prometheus_node_exporter.user | d('prometheus') }}"
-  password: "{{ prometheus_node_exporter.password | d('password123') | password_hash('bcrypt', '1234567890123456789012') }}"
+  enable: false
+  user: 'prometheus'
+  password: 'password123'
