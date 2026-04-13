@@ -95,6 +95,7 @@
     mode: '0640'
   notify:
     - Restart node_exporter
+    - Systemd reload
 
 - name: Copy node_exporter web config
   ansible.builtin.template:
